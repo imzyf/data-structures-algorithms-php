@@ -1,0 +1,49 @@
+includes:
+#  - .phpstan/phpstan-baseline.neon
+
+parameters:
+  level: 8
+  errorFormat: table
+  phpVersion: 80100 # PHP 8.1
+  bootstrapFiles:
+#    - .phpstan/bootstrap.php
+    - ./vendor/yiisoft/yii2/Yii.php
+  parallel:
+    jobSize: 20
+    maximumNumberOfProcesses: 32
+    minimumNumberOfJobsPerProcess: 2
+  reportUnmatchedIgnoredErrors: false
+  editorUrl: 'phpstorm://open?file=%%file%%&line=%%line%%'
+  ignoreErrors:
+    # ARRAY
+    # ARRAY parameter 允许纯 array 类型
+    - message: "#(^Method|^Function) (.* has parameter .* with|.* return type has) no value type specified in iterable type array\\.$#"
+    # ARRAY Property 允许纯 array 类型
+    - message: "#^Property .* type has no value type specified in iterable type array\\.$#"
+    # 允许纯 array 类型
+    - message: "#^PHPDoc tag @var for variable .* has no value type specified in iterable type array\\.$#"
+
+    # AR 与 ARRAY
+    # 允许 AR all() 当做返回值
+    - message: "#^Method .* should return array.* but returns array\\<yii\\\\db\\\\ActiveRecordInterface\\>\\.$#"
+
+    # collect
+    - message: "#^Unable to resolve the template type (TKey|TValue) in call to function collect$#"
+
+    # 忽略常量判断
+    - message: "#(^Negated boolean expression|^Ternary operator condition|^If condition|^Left side of &&) is always (true|false)\\.$#"
+      paths:
+        - ./config/*
+        - ./foundation/log/Log.php
+  paths:
+    - foundation
+    - config
+    - framework
+    - withholding
+    - longTermInvestment
+    - gl
+  scanDirectories:
+  excludePaths:
+    analyse:
+      - foundation/mail
+      - framework/frontend/mail

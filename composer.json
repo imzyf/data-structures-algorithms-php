@@ -1,0 +1,30 @@
+{
+    "name": "imzyf/data-structures-algorithms-php",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "DSA\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "tests\\": "tests/"
+        },
+        "classmap": [],
+        "files": []
+    },
+    "authors": [
+        {
+            "name": "zhaoyifan",
+            "email": "zhaoyifans@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.1.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.40",
+        "phpunit/phpunit": "^10.5",
+        "rector/rector": "^1.1.1"
+    }
+}
