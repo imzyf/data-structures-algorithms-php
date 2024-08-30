@@ -22,8 +22,8 @@ class Highlight
             foreach (mb_str_split($key) as $deep => $char) {
                 if (!isset($node->children[$char])) {
                     // 子节点 不存在，创建新的子节点
-                    $node = $node->children[$char] = new TrieNode($deep + 1);
-
+                    $node = $node->children[$char] = new TrieNode();
+                    $node->deep = $deep + 1;
                     continue;
                 }
                 // 存在
@@ -31,7 +31,7 @@ class Highlight
             }
 
             // 到底了 是结尾
-            $node->ending = true;
+            $node->isEnding = true;
         }
 
         // flags 0 1 表示 单字是否需要 highlight，前后设置2个守卫值，方便后续判断
@@ -48,7 +48,7 @@ class Highlight
             $i = $idx;
             while (null !== $node) {
                 // 向跟更深处遍历，检查下一个字
-                if ($node->ending) {
+                if ($node->isEnding) {
                     $deepNode = $node;
                 }
                 ++$i;
