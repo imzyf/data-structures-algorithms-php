@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DSA\L06_LinkedList;
 
 /**
@@ -56,7 +58,7 @@ class LRUCacheGPT
 
     private function updateAccessOrder($key)
     {
-        $index = array_search($key, $this->accessOrder);
+        $index = array_search($key, $this->accessOrder, true);
         unset($this->accessOrder[$index]);
         $this->accessOrder[] = $key;
     }
